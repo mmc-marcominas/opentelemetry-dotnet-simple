@@ -10,7 +10,7 @@ ignore := 'test*|obj|bin'
 #   make start
 
 clean:
-		@dotnet clean
+		@dotnet clean >&2
 
 build:
 		@dotnet build --configuration Release
