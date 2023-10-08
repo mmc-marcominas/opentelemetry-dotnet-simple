@@ -128,3 +128,8 @@ Then you can install the Instrumentation packages:
 dotnet add package OpenTelemetry.Instrumentation.AspNetCore --prerelease
 dotnet add package OpenTelemetry.Instrumentation.Http --prerelease
 ```
+
+## Adding OpenTelemetry docker-compose
+
+Implementation basen on [Monitoring metrics using otel](https://pratapsharma.com.np/monitoring-metrics-using-otel) article.
+
