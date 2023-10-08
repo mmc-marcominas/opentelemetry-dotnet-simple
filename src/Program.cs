@@ -4,9 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.ConfigureLogging();
 
-builder.ConfigureMetrics();
-
-builder.ConfigureTracing();
+builder.ConfigureOpenTelemetry();
 
 builder.Services.AddEndpointsApiExplorer();
 

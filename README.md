@@ -127,6 +127,8 @@ Then you can install the Instrumentation packages:
 ``` shell
 dotnet add package OpenTelemetry.Instrumentation.AspNetCore --prerelease
 dotnet add package OpenTelemetry.Instrumentation.Http --prerelease
+dotnet add package OpenTelemetry.Exporter.Prometheus  --prerelease
+dotnet add package OpenTelemetry.Exporter.Zipkin --prerelease
 ```
 
 ## Adding OpenTelemetry docker-compose

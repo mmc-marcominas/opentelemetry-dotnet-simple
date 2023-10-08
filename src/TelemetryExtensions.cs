@@ -1,3 +1,4 @@
+
 using OpenTelemetry.Trace;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Logs;
@@ -7,6 +8,7 @@ public static class TelemetryExtensions
 {
   public static void ConfigureLogging(this WebApplicationBuilder builder)
   {
+    var serviceName = builder.Configuration["OpenTelemetry:Exporters:Zipkin:ServiceName"] ?? builder.Environment.ApplicationName;
     builder.Logging.ClearProviders();
 
     builder.Logging.AddOpenTelemetry(logging =>
@@ -15,7 +17,7 @@ public static class TelemetryExtensions
 
       var resourceBuilder = ResourceBuilder
           .CreateDefault()
-          .AddService(builder.Environment.ApplicationName);
+          .AddService(serviceName);
 
       logging.SetResourceBuilder(resourceBuilder)
             .AddConsoleExporter(); // ConsoleExporter is used for demo purpose only.
@@ -23,20 +25,16 @@ public static class TelemetryExtensions
 
   }
 
-  public static void ConfigureTracing(this WebApplicationBuilder builder)
+  public static void ConfigureOpenTelemetry(this WebApplicationBuilder builder)
   {
     builder.Services.AddOpenTelemetry()
            .WithTracing(b =>
            {
              b
              .AddHttpClientInstrumentation()
-             .AddAspNetCoreInstrumentation();
-           });
-  }
-
-  public static void ConfigureMetrics(this WebApplicationBuilder builder)
-  {
-    builder.Services.AddOpenTelemetry()
+             .AddAspNetCoreInstrumentation()
+             ;
+           })
            .WithMetrics(b =>
            {
               b

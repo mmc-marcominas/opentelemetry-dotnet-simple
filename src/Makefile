@@ -7,22 +7,27 @@ ignore := 'test*|obj|bin'
 #   make publish
 #   make run
 #   make all
-#   make start
+#   make test
+#   make otel
 
 clean:
-		@dotnet clean >&2
+		@echo -e '\nCleaning .NET Core solution'
+		@dotnet clean > /dev/null
 
 build:
+		@echo -e '\nBuilding .NET Core solution\n'
 		@dotnet build --configuration Release
 
 publish:
+		@echo -e '\nPublishing .NET Core solution\n'
 		@dotnet publish --configuration Release
 		@tree . -I $(ignore)
 
 run:
+		@echo -e '\nRunning .NET Core solution\n'
 		@dotnet run
 
-run-otel:
+otel:
 		@./otel-dotnet-run.sh
 
 test:
